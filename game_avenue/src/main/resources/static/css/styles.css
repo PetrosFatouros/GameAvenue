@@ -1,0 +1,44 @@
+#logo_image {
+    width: 120px;
+    height: 95px;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+#logout_form {
+    max-width: 330px;
+    padding: 15px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+select{
+    max-width: 330px;
+    margin: 0 auto;
+}
+
+#search_form {
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#search_form_button {
+    max-width: 330px;
+}
+
+#card_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 25%);
+    justify-content: space-between;
+}
+.card {
+    width: 18rem;
+    margin-bottom: 10%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+

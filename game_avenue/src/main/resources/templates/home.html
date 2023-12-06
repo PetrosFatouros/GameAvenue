@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Avenue - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel='stylesheet' th:href="@{/css/actions.css}">
+    <link rel='stylesheet' th:href="@{/css/styles.css}">
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="profile" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+        </symbol>
+        <symbol id="search_basic" viewBox="0 0 16 16">
+            <path d="M3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3zm5 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+        </symbol>
+        <symbol id="search_advanced" viewBox="0 0 16 16">
+            <path d="M3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3zm1 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm1.5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM12 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM4 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+        </symbol>
+        <symbol id="admin_view_users" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+        </symbol>
+        <symbol id="admin_register_user" viewBox="0 0 16 16">
+            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+        </symbol>
+        <symbol id="admin_update_db" viewBox="0 0 16 16">
+            <path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2z"/>
+            <path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23z"/>
+        </symbol>
+    </svg>
+
+    <main>
+        <div id="google_translate_element" class="text-center"></div><br>
+
+        <form id="logout_form" th:action="@{/logout}" method="post">
+            <img class="mb-4" id="logo_image" src="../static/images/game_avenue_logo.png"
+                 th:src="@{/images/game_avenue_logo.png}" alt="">
+            <h1 class="h3 mb-3 fw-normal" th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1>
+
+            <input class="w-100 btn btn-lg btn-primary" type="submit" value="Log Out"/>
+        </form>
+
+        <div sec:authorize="hasRole('USER')" class="container px-4 py-5" id="hanging-icons">
+            <h2 class="pb-2 border-bottom">User actions</h2>
+
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#profile"/></svg>
+                    </div>
+                    <div>
+                        <h2>View personal list</h2>
+                        <p>View your list of saved games.</p>
+                        <a th:href="@{/profile}" class="btn btn-primary">
+                            Select action
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#search_basic"/></svg>
+                    </div>
+                    <div>
+                        <h2>Search games</h2>
+                        <p>Search games based on title, platform and genre. You can also sort the results. </p>
+                        <a th:href="@{/search/basic}" class="btn btn-primary">
+                            Select action
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#search_advanced"/></svg>
+                    </div>
+                    <div>
+                        <h2>Search games (advanced)</h2>
+                        <p>Search games based on title, multiple genres and platform.</p>
+                        <a th:href="@{/search/advanced}" class="btn btn-primary">
+                            Select action
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div sec:authorize="hasRole('ADMIN')" class="container px-4 py-5" id="hanging-icons-2">
+            <h2 class="pb-2 border-bottom">Admin actions</h2>
+
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#admin_view_users"/></svg>
+                    </div>
+                    <div>
+                        <h2>View users</h2>
+                        <p>View all users stored in te database.</p>
+                        <a th:href="@{/users}" class="btn btn-primary">
+                            Select action
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#admin_register_user"/></svg>
+                    </div>
+                    <div>
+                        <h2>Register user</h2>
+                        <p>Insert a new user to the database. </p>
+                        <a th:href="@{/register}" class="btn btn-primary">
+                            Select action
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col d-flex align-items-start">
+                    <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#admin_update_db"/></svg>
+                    </div>
+                    <div>
+                        <h2>Update database</h2>
+                        <p>Load all currently available games to the database. </p>
+                        <a th:href="@{/update}" class="btn btn-primary">
+                            Select action
+                        </a>
+
+                        <div class="alert alert-success" role="alert" th:if="${param.success}">
+                            Database updated successfully!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <!--suppress JSUnresolvedFunction, JSUnresolvedVariable, JSUnusedGlobalSymbols -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
